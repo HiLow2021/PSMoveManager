@@ -7,7 +7,6 @@ namespace PSMove
     public class PSMoveModel : IDisposable
     {
         internal IntPtr Move { get; private set; }
-        public int PSMoveID { get; internal set; }
         public bool IsConnected => Move != IntPtr.Zero;
 
         public PSMoveModel()
