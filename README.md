@@ -62,7 +62,7 @@ https://github.com/thp/psmoveapi/tree/master
 2. PlayStation Eye のケーブルを PC の USB ポートに接続する。
 3. ドライバーと一緒にインストールされた CL-eye Test を実行。無事に PlayStation Eye の画面が表示されれば接続に成功。(別のデバイスの画面が表示される場合は、メニューの Devices から PlayStation Eye を選択する)
 
-### 注意点
+## 注意点
 
 - 室内が暗すぎると、PS Move を PlayStation Eye が認識しない。ある程度、部屋を明るくすること。
 - PlayStation Eye (USB2.0) を USB3.0 ポートに接続すると認識しないという報告あり。
