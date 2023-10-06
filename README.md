@@ -43,7 +43,7 @@ https://github.com/thp/psmoveapi/tree/master
 ### 詳細
 
 1. PS Move API の[バイナリ](https://github.com/thp/psmoveapi/releases) (psmoveapi-4.0.12-windows-msvc2017-xxx.zip) をダウンロード。
-付属の psmove.eve は CLI ツール。ターミナルを管理者権限で開いて利用。
+付属の psmove.exe は CLI ツール。ターミナルを管理者権限で開いて利用。
 2. PS Move と PC を USB ケーブルで有線接続する。
 また、PC に Bluetooth が付いていない場合は、Bluetooth アダプターを接続しておく。
 3. `psmove.exe pair` コマンドを実行する。PC に Bluetooth 機能がないとエラーが出る。
