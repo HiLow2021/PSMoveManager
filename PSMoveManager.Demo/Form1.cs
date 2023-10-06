@@ -195,7 +195,7 @@ namespace PSMoveManager.Demo
         {
             var message = isConnected ? isDataAvailable ? "コントローラ接続中" : "データが取得できません" : "コントローラが接続されていません";
 
-            toolStripStatusLabel1.Text = message;
+            statusStrip1.Invoke(new Action(() => toolStripStatusLabel1.Text = message));
         }
 
         private void ShowConnectionTypeMessage(PSMove_Connection_Type connectionType)
