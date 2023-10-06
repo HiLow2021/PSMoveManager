@@ -70,6 +70,7 @@ namespace PSMove
      *
      * Used by psmove_get_buttons() and psmove_get_button_events().
      **/
+    [Flags]
     public enum PSMove_Button
     {
         /**
