@@ -37,12 +37,12 @@ namespace PSMove
 {
     /*! Hardware model type for controller.
          **/
-    public enum PSMove_Model_Type
+    public enum PSMoveModelType
     {
-        Model_Unknown = 0,
-        Model_ZCM1,
-        Model_ZCM2,
-        Model_Count
+        Unknown = 0,
+        ZCM1,
+        ZCM2,
+        Count
     }
 
     /*! Connection type for controllers.
@@ -54,11 +54,11 @@ namespace PSMove
      *
      * Used by psmove_connection_type().
      **/
-    public enum PSMove_Connection_Type
+    public enum PSMoveConnectionType
     {
-        Conn_Bluetooth, /*!< The controller is connected via Bluetooth */
-        Conn_USB, /*!< The controller is connected via USB */
-        Conn_Unknown, /*!< Unknown connection type / other error */
+        Bluetooth, /*!< The controller is connected via Bluetooth */
+        USB, /*!< The controller is connected via USB */
+        Unknown, /*!< Unknown connection type / other error */
     }
 
     /*! Button flags.
@@ -71,7 +71,7 @@ namespace PSMove
      * Used by psmove_get_buttons() and psmove_get_button_events().
      **/
     [Flags]
-    public enum PSMove_Button
+    public enum PSMoveButton
     {
         /**
          * See comment in psmove_get_buttons() for how this is
@@ -80,17 +80,17 @@ namespace PSMove
          * Source:
          * https://github.com/nitsch/moveonpc/wiki/Input-report
          **/
-        Btn_TRIANGLE = 1 << 4, /*!< Green triangle */
-        Btn_CIRCLE = 1 << 5, /*!< Red circle */
-        Btn_CROSS = 1 << 6, /*!< Blue cross */
-        Btn_SQUARE = 1 << 7, /*!< Pink square */
+        Triangle = 1 << 4, /*!< Green triangle */
+        Circle = 1 << 5, /*!< Red circle */
+        Cross = 1 << 6, /*!< Blue cross */
+        Square = 1 << 7, /*!< Pink square */
 
-        Btn_SELECT = 1 << 8, /*!< Select button, left side */
-        Btn_START = 1 << 11, /*!< Start button, right side */
+        Select = 1 << 8, /*!< Select button, left side */
+        Start = 1 << 11, /*!< Start button, right side */
 
-        Btn_PS = 1 << 16, /*!< PS button, front center */
-        Btn_MOVE = 1 << 19, /*!< Move button, big front button */
-        Btn_T = 1 << 20, /*!< Trigger, on the back */
+        PS = 1 << 16, /*!< PS button, front center */
+        Move = 1 << 19, /*!< Move button, big front button */
+        Trigger = 1 << 20, /*!< Trigger, on the back */
 
         /* Not used for now - only on Sixaxis/DS3 or nav controller */
         // Btn_L2 = 1 << 0x00,
@@ -112,32 +112,32 @@ namespace PSMove
      *
      * Use these values to index into e.g. SDL Joystick Buttons.
      **/
-    public enum PSNav_Button
+    public enum PSNavButton
     {
-        NavBtn_CROSS = 0, /*!< Cross button */
-        NavBtn_CIRCLE = 1, /*!< Circle button */
+        Cross = 0, /*!< Cross button */
+        Circle = 1, /*!< Circle button */
 
-        NavBtn_L1 = 4, /*!< Shoulder button */
-        NavBtn_L2 = 5, /*!< Trigger */
-        NavBtn_L3 = 7, /*!< Analog stick */
+        L1 = 4, /*!< Shoulder button */
+        L2 = 5, /*!< Trigger */
+        L3 = 7, /*!< Analog stick */
 
-        NavBtn_PS = 6, /*!< PS button */
+        PS = 6, /*!< PS button */
 
-        NavBtn_UP = 8, /*!< D-Pad UP */
-        NavBtn_DOWN = 9, /*!< D-Pad DOWN */
-        NavBtn_LEFT = 10, /*!< D-Pad LEFT */
-        NavBtn_RIGHT = 11, /*!< D-Pad RIGHT */
+        Up = 8, /*!< D-Pad UP */
+        Down = 9, /*!< D-Pad DOWN */
+        Left = 10, /*!< D-Pad LEFT */
+        Right = 11, /*!< D-Pad RIGHT */
     }
 
     /*! Navigation Controller axes.
      *
      * Use these values to index into e.g. SDL Joystick Axes.
      **/
-    public enum PSNav_Axis
+    public enum PSNavAxis
     {
-        NavAxis_X = 0,
-        NavAxis_Y = 1,
-        NavAxis_Trigger = 2, /*!< might not work on macOS */
+        X = 0,
+        Y = 1,
+        Trigger = 2, /*!< might not work on macOS */
     }
 
 
@@ -150,10 +150,10 @@ namespace PSMove
      *
      * Used by psmove_get_accelerometer_frame() and psmove_get_gyroscope_frame().
      **/
-    public enum PSMove_Frame
+    public enum PSMoveFrame
     {
-        Frame_FirstHalf = 0, /*!< The older frame */
-        Frame_SecondHalf, /*!< The most recent frame */
+        FirstHalf = 0, /*!< The older frame */
+        SecondHalf, /*!< The most recent frame */
     }
 
     /*! Battery charge level.
@@ -164,65 +164,65 @@ namespace PSMove
      *
      * Used by psmove_get_battery().
      **/
-    public enum PSMove_Battery_Level
+    public enum PSMoveBatteryLevel
     {
-        Batt_MIN = 0x00, /*!< Battery is almost empty (< 20%) */
-        Batt_20Percent = 0x01, /*!< Battery has at least 20% remaining */
-        Batt_40Percent = 0x02, /*!< Battery has at least 40% remaining */
-        Batt_60Percent = 0x03, /*!< Battery has at least 60% remaining */
-        Batt_80Percent = 0x04, /*!< Battery has at least 80% remaining */
-        Batt_MAX = 0x05, /*!< Battery is fully charged (not on charger) */
-        Batt_CHARGING = 0xEE, /*!< Battery is currently being charged */
-        Batt_CHARGING_DONE = 0xEF, /*!< Battery is fully charged (on charger) */
+        Min = 0x00, /*!< Battery is almost empty (< 20%) */
+        Percent20 = 0x01, /*!< Battery has at least 20% remaining */
+        Percent40 = 0x02, /*!< Battery has at least 40% remaining */
+        Percent60 = 0x03, /*!< Battery has at least 60% remaining */
+        Percent80 = 0x04, /*!< Battery has at least 80% remaining */
+        Max = 0x05, /*!< Battery is fully charged (not on charger) */
+        Charging = 0xEE, /*!< Battery is currently being charged */
+        ChargingDone = 0xEF, /*!< Battery is fully charged (on charger) */
     }
 
     /*! LED update result, returned by psmove_update_leds() */
-    public enum PSMove_Update_Result
+    public enum PSMoveUpdateResult
     {
-        Update_Failed = 0, /*!< Could not update LEDs */
-        Update_Success, /*!< LEDs successfully updated */
-        Update_Ignored, /*!< LEDs don't need updating, see psmove_set_rate_limiting() */
+        Failed = 0, /*!< Could not update LEDs */
+        Success, /*!< LEDs successfully updated */
+        Ignored, /*!< LEDs don't need updating, see psmove_set_rate_limiting() */
     }
 
     /*! Boolean type. Use them instead of 0 and 1 to improve code readability. */
-    public enum PSMove_Bool
+    public enum PSMoveBool
     {
-        PSMove_False = 0, /*!< False, Failure, Disabled (depending on context) */
-        PSMove_True = 1, /*!< True, Success, Enabled (depending on context) */
+        False = 0, /*!< False, Failure, Disabled (depending on context) */
+        True = 1, /*!< True, Success, Enabled (depending on context) */
     }
 
     /*! Remote configuration options, for psmove_set_remote_config() */
-    public enum PSMove_RemoteConfig
+    public enum PSMoveRemoteConfig
     {
-        PSMove_LocalAndRemote = 0, /*!< Use both local (hidapi) and remote (moved) devices */
-        PSMove_OnlyLocal = 1, /*!< Use only local (hidapi) devices, ignore remote devices */
-        PSMove_OnlyRemote = 2, /*!< Use only remote (moved) devices, ignore local devices */
+        LocalAndRemote = 0, /*!< Use both local (hidapi) and remote (moved) devices */
+        OnlyLocal = 1, /*!< Use only local (hidapi) devices, ignore remote devices */
+        OnlyRemote = 2, /*!< Use only remote (moved) devices, ignore local devices */
     }
 
-    public enum PSMoveOrientation_Fusion_Type
+    public enum PSMoveOrientationFusionType
     {
-        OrientationFusion_None,
-        OrientationFusion_MadgwickIMU,
-        OrientationFusion_MadgwickMARG,
-        OrientationFusion_ComplementaryMARG,
+        None,
+        MadgwickIMU,
+        MadgwickMARG,
+        ComplementaryMARG,
     }
 
     /*! Common Calibration Poses */
-    public enum PSMove_CalibrationPose_Type
+    public enum PSMoveCalibrationPoseType
     {
-        CalibrationPose_Upright,
-        CalibrationPose_LyingFlat
+        Upright,
+        LyingFlat
     }
 
     /*! Coordinate systems to use for the sensor data */
-    public enum PSMove_SensorDataBasis_Type
+    public enum PSMoveSensorDataBasisType
     {
-        SensorDataBasis_Native,
-        SensorDataBasis_OpenGL,
+        Native,
+        OpenGL,
     }
 
     /*! Extension device information */
-    public struct PSMove_Ext_Device_Info
+    public struct PSMoveExtDeviceInfo
     {
         ushort dev_id;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 38)] byte[] dev_info;
@@ -230,7 +230,7 @@ namespace PSMove
 
     // 共用体のマーシャリングは、上手くいっていない可能性があります。要確認。
     [StructLayout(LayoutKind.Explicit)]
-    public struct PSMove_3AxisVector
+    public struct PSMove3AxisVector
     {
         [FieldOffset(0)]
         public float x;
@@ -246,7 +246,7 @@ namespace PSMove
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public struct PSMove_3AxisTransform
+    public struct PSMove3AxisTransform
     {
         [FieldOffset(0)]
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)] public float[] row0;
@@ -275,7 +275,7 @@ namespace PSMove
         private byte[] PSMove_Ext_Data = new byte[PSMOVE_EXT_DATA_BUF_SIZE];
 
         /*! Library version number */
-        public enum PSMove_Version
+        public enum PSMoveVersion
         {
             /**
              * Version format: AA.BB.CC = 0xAABBCC
@@ -284,9 +284,9 @@ namespace PSMove
              *  3.2.1 = 0x030201
              *  4.0.12 = 0x04000C
              **/
-            PSMOVE_CURRENT_VERSION = (PSMOVEAPI_VERSION_MAJOR << 16) |
-                                     (PSMOVEAPI_VERSION_MINOR << 8) |
-                                     (PSMOVEAPI_VERSION_PATCH << 0)
+            CurrentVersion = (PSMOVEAPI_VERSION_MAJOR << 16) |
+                             (PSMOVEAPI_VERSION_MINOR << 8) |
+                             (PSMOVEAPI_VERSION_PATCH << 0)
         }
 
         /**
@@ -309,7 +309,7 @@ namespace PSMove
          * \return \ref PSMove_True on success (version compatible, library initialized)
          * \return \ref PSMove_False otherwise (version mismatch, initialization error)
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_init(PSMove_Version version);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_init(PSMoveVersion version);
 
         /**
          * \brief Enable or disable the usage of local or remote devices
@@ -326,7 +326,7 @@ namespace PSMove
          * \param config \ref PSMove_LocalAndRemote, \ref PSMove_OnlyLocal or
          *               \ref PSMove_OnlyRemote
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_set_remote_config(PSMove_RemoteConfig config);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_set_remote_config(PSMoveRemoteConfig config);
 
         /**
          * \brief Get the number of available controllers
@@ -382,7 +382,7 @@ namespace PSMove
          * \return \ref Conn_USB if the controller is connected via USB
          * \return \ref Conn_Unknown on error
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Connection_Type psmove_connection_type(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveConnectionType psmove_connection_type(IntPtr move);
 
         /**
          * \brief Check if the controller is remote (\c moved) or local.
@@ -396,7 +396,7 @@ namespace PSMove
          * \return \ref PSMove_False if the controller is connected locally
          * \return \ref PSMove_True if the controller is connected remotely
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_is_remote(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_is_remote(IntPtr move);
 
         /**
          * \brief Get the serial number (Bluetooth MAC address) of a controller.
@@ -431,7 +431,7 @@ namespace PSMove
          *
          * \return The \ref PSMove_Model_Type type of the controller
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Model_Type psmove_get_model(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveModelType psmove_get_model(IntPtr move);
 
         /**
          * \brief Pair a controller connected via USB with the computer.
@@ -464,14 +464,14 @@ namespace PSMove
          * \return \ref PSMove_True if the pairing was successful
          * \return \ref PSMove_False if the pairing failed
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_pair(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_pair(IntPtr move);
 
         /**
          * \brief Add an entry for a controller paired on another host.
          *
          * \param addr The Bluetooth address of the PS move to add
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_host_pair_custom(string addr);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_host_pair_custom(string addr);
 
         /**
          * \brief Add an entry for a controller paired on another host.
@@ -483,7 +483,7 @@ namespace PSMove
          * \param addr The Bluetooth address of the PS move to add
          * \param model The hardware model type of the controller
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_host_pair_custom_model(string addr, PSMove_Model_Type model);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_host_pair_custom_model(string addr, PSMoveModelType model);
 
         /**
          * \brief Pair a controller connected via USB to a specific address.
@@ -497,7 +497,7 @@ namespace PSMove
          * \return \ref PSMove_True if the pairing was successful
          * \return \ref PSMove_False if the pairing failed
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_pair_custom(IntPtr move, string new_host_string);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_pair_custom(IntPtr move, string new_host_string);
 
         /**
          * \brief Enable or disable LED update rate limiting.
@@ -516,7 +516,7 @@ namespace PSMove
          * \param enabled \ref PSMove_True to enable rate limiting,
          *                \ref PSMove_False to disable
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_set_rate_limiting(IntPtr move, PSMove_Bool enabled);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_set_rate_limiting(IntPtr move, PSMoveBool enabled);
 
         /**
          * \brief Set the RGB LEDs on the PS Move controller.
@@ -570,7 +570,7 @@ namespace PSMove
          * \return \ref PSMove_True on success
          * \return \ref PSMove_False on error
          */
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_set_led_pwm_frequency(IntPtr move, ulong freq);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_set_led_pwm_frequency(IntPtr move, ulong freq);
 
         /**
          * \brief Set the rumble intensity of the PS Move controller.
@@ -615,7 +615,7 @@ namespace PSMove
          * \return \ref Update_Ignored if the change was ignored (see psmove_set_rate_limiting())
          * \return \ref Update_Failed (= \c 0) on error
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Update_Result psmove_update_leds(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveUpdateResult psmove_update_leds(IntPtr move);
 
         /**
          * \brief Read new sensor/button data from the controller.
@@ -673,7 +673,7 @@ namespace PSMove
          * \return \ref PSMove_False on error
          *
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_get_ext_data(IntPtr move, ref byte[] data); // dataのサイズはPSMOVE_EXT_DATA_BUF_SIZEにしてください。
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_get_ext_data(IntPtr move, ref byte[] data); // dataのサイズはPSMOVE_EXT_DATA_BUF_SIZEにしてください。
 
         /**
          * \brief Send data to a connected extension device.
@@ -685,7 +685,7 @@ namespace PSMove
          * \return \ref PSMove_True on success
          * \return \ref PSMove_False on error
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_send_ext_data(IntPtr move, ref byte data, byte length);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_send_ext_data(IntPtr move, ref byte data, byte length);
 
         /**
          * \brief Get the current button states from the controller.
@@ -760,7 +760,7 @@ namespace PSMove
          * \return \ref PSMove_True if an extension device is connected
          * \return \ref PSMove_False if no extension device is connected or in case of an error
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_is_ext_connected(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_is_ext_connected(IntPtr move);
 
         /**
          * \brief Get information from an extension device connected to the controller.
@@ -775,7 +775,7 @@ namespace PSMove
          * \return \ref PSMove_True on success
          * \return \ref PSMove_False on error
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_get_ext_device_info(IntPtr move, ref PSMove_Ext_Device_Info info);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_get_ext_device_info(IntPtr move, ref PSMoveExtDeviceInfo info);
 
         /**
          * \brief Get the battery charge level of the controller.
@@ -791,7 +791,7 @@ namespace PSMove
          * \param move A valid \ref PSMove handle
          * \return A \ref PSMove_Battery_Level (\ref Batt_CHARGING when charging)
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Battery_Level psmove_get_battery(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBatteryLevel psmove_get_battery(IntPtr move);
 
         /**
          * \brief Get the current raw device temperature reading of the
@@ -930,7 +930,7 @@ namespace PSMove
          * \param az Pointer to store the Z axis reading, or \c NULL
          **/
         [DllImport("psmoveapi.dll")]
-        public extern static void psmove_get_accelerometer_frame(IntPtr move, PSMove_Frame frame,
+        public extern static void psmove_get_accelerometer_frame(IntPtr move, PSMoveFrame frame,
             ref float ax, ref float ay, ref float az);
 
         /**
@@ -965,7 +965,7 @@ namespace PSMove
          * \param gz Pointer to store the Z axis reading, or \c NULL
          **/
         [DllImport("psmoveapi.dll")]
-        public extern static void psmove_get_gyroscope_frame(IntPtr move, PSMove_Frame frame,
+        public extern static void psmove_get_gyroscope_frame(IntPtr move, PSMoveFrame frame,
             ref float gx, ref float gy, ref float gz);
 
         /**
@@ -1024,7 +1024,7 @@ namespace PSMove
          * \param move A valid \ref PSMove handle
          * \param out_m The output \ref PSMove_3AxisVector
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_magnetometer_3axisvector(IntPtr move, ref PSMove_3AxisVector out_m);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_magnetometer_3axisvector(IntPtr move, ref PSMove3AxisVector out_m);
 
         /**
          * \brief Reset the magnetometer calibration state.
@@ -1079,7 +1079,7 @@ namespace PSMove
          *
          * \return \ref PSMove_True if calibration is supported, \ref PSMove_False otherwise
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_has_calibration(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_has_calibration(IntPtr move);
 
         /**
          * \brief Dump the calibration information to stdout.
@@ -1110,7 +1110,7 @@ namespace PSMove
          * \param move A valid \ref PSMove handle
          * \param enabled \ref PSMove_True to enable orientation tracking, \ref PSMove_False to disable
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_enable_orientation(IntPtr move, PSMove_Bool enabled);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_enable_orientation(IntPtr move, PSMoveBool enabled);
 
         /**
          * \brief Check if orientation tracking is available for this controller.
@@ -1130,7 +1130,7 @@ namespace PSMove
          *
          * \return \ref PSMove_True if calibration is supported, \ref PSMove_False otherwise
          **/
-        [DllImport("psmoveapi.dll")] public extern static PSMove_Bool psmove_has_orientation(IntPtr move);
+        [DllImport("psmoveapi.dll")] public extern static PSMoveBool psmove_has_orientation(IntPtr move);
 
         /**
          * \brief Get the current orientation as quaternion.
@@ -1188,7 +1188,7 @@ namespace PSMove
          * \param move A valid \ref PSMove handle
          * \param fusion_type The orientation fusion algorithm denoted by the \ref PSMoveOrientation_Fusion_Type enum
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_set_orientation_fusion_type(IntPtr move, PSMoveOrientation_Fusion_Type fusion_type);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_set_orientation_fusion_type(IntPtr move, PSMoveOrientationFusionType fusion_type);
 
         /**
          * \brief Set a common transform used on the calibration data in the psmove_get_transform_<sensor>_... methods
@@ -1221,7 +1221,7 @@ namespace PSMove
          * \param orientation_state A valid \ref PSMoveOrientation handle
          * \param transform A \ref PSMove_CalibrationPose_Type common transform to apply to the calibration data
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_set_calibration_pose(IntPtr move, PSMove_CalibrationPose_Type calibration_pose);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_set_calibration_pose(IntPtr move, PSMoveCalibrationPoseType calibration_pose);
 
         /**
         * \brief Set the custom transform used on the calibration data in the psmove_get_transform_<sensor>_... methods
@@ -1229,7 +1229,7 @@ namespace PSMove
         * \param orientation_state A valid \ref PSMoveOrientation handle
         * \param transform A \ref PSMove_3AxisTransform transform to apply to the calibration data
         **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_set_calibration_transform(IntPtr move, ref PSMove_3AxisTransform transform);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_set_calibration_transform(IntPtr move, ref PSMove3AxisTransform transform);
 
         /**
         * \brief Get the native earth gravity direction.
@@ -1240,7 +1240,7 @@ namespace PSMove
         *
         * \return The expected direction of gravity
         **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_identity_gravity_calibration_direction(IntPtr move, ref PSMove_3AxisVector out_a);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_identity_gravity_calibration_direction(IntPtr move, ref PSMove3AxisVector out_a);
 
         /**
         * \brief Get the transformed earth gravity direction.
@@ -1251,7 +1251,7 @@ namespace PSMove
         *
         * \return The transformed expected direction of gravity
         **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_gravity_calibration_direction(IntPtr move, ref PSMove_3AxisVector out_a);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_gravity_calibration_direction(IntPtr move, ref PSMove3AxisVector out_a);
 
         /**
         * \brief Get the calibration magnetometer direction.
@@ -1262,7 +1262,7 @@ namespace PSMove
         *
         * \return The direction of the magnetic field
         **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_identity_magnetometer_calibration_direction(IntPtr move, ref PSMove_3AxisVector out_m);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_identity_magnetometer_calibration_direction(IntPtr move, ref PSMove3AxisVector out_m);
 
         /**
         * \brief Get the transformed calibration magnetometer direction.
@@ -1272,7 +1272,7 @@ namespace PSMove
         * \param move A valid \ref PSMove handle
         * \param out_m The output \ref PSMove_3AxisVector
         **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_magnetometer_calibration_direction(IntPtr move, ref PSMove_3AxisVector out_m);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_magnetometer_calibration_direction(IntPtr move, ref PSMove3AxisVector out_m);
 
         /**
         * \brief Set the calibration magnetometer direction.
@@ -1283,7 +1283,7 @@ namespace PSMove
         * \param move A valid \ref PSMove handle
         * \param m A valid \ref PSMoveVector
         **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_set_magnetometer_calibration_direction(IntPtr move, ref PSMove_3AxisVector m);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_set_magnetometer_calibration_direction(IntPtr move, ref PSMove3AxisVector m);
 
         /**
          * \brief Set the transform used on the sensor data in the psmove_get_transform_<sensor>_... methods
@@ -1317,7 +1317,7 @@ namespace PSMove
          * \param orientation_state A valid \ref PSMoveOrientation handle
          * \param transform A \ref PSMove_SensorDataBasis_Type transform to apply to the sensor data
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_set_sensor_data_basis(IntPtr move, PSMove_SensorDataBasis_Type basis_type);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_set_sensor_data_basis(IntPtr move, PSMoveSensorDataBasisType basis_type);
 
         /**
         * \brief Set the transform used on the sensor data in the psmove_get_transform_<sensor>_... methods
@@ -1325,7 +1325,7 @@ namespace PSMove
         * \param orientation_state A valid \ref PSMoveOrientation handle
         * \param transform A \ref PSMove_3AxisTransform transform to apply to the sensor data
         **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_set_sensor_data_transform(IntPtr move, ref PSMove_3AxisTransform transform);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_set_sensor_data_transform(IntPtr move, ref PSMove3AxisTransform transform);
 
         /**
          * \brief Get the transformed current magnetometer direction.
@@ -1338,7 +1338,7 @@ namespace PSMove
          * \param move A valid \ref PSMove handle
          * \param out_m The output \ref PSMove_3AxisVector
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_magnetometer_direction(IntPtr move, ref PSMove_3AxisVector out_m);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_magnetometer_direction(IntPtr move, ref PSMove3AxisVector out_m);
 
         /**
          * \brief Get the transformed current accelerometer vector.
@@ -1351,7 +1351,7 @@ namespace PSMove
          * \param move A valid \ref PSMove handle
          * \param out_a The output \ref PSMove_3AxisVector
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_accelerometer_frame_3axisvector(IntPtr move, PSMove_Frame frame, ref PSMove_3AxisVector out_a);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_accelerometer_frame_3axisvector(IntPtr move, PSMoveFrame frame, ref PSMove3AxisVector out_a);
 
         /**
          * \brief Get the transformed normalized current accelerometer direction.
@@ -1364,7 +1364,7 @@ namespace PSMove
          * \param move A valid \ref PSMove handle
          * \param out_a The output \ref PSMove_3AxisVector
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_accelerometer_frame_direction(IntPtr move, PSMove_Frame frame, ref PSMove_3AxisVector out_a);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_accelerometer_frame_direction(IntPtr move, PSMoveFrame frame, ref PSMove3AxisVector out_a);
 
         /**
          * \brief Get the transformed current gyroscope vector.
@@ -1377,7 +1377,7 @@ namespace PSMove
          * \param move A valid \ref PSMove handle
          * \param out_w The output \ref PSMove_3AxisVector
          **/
-        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_gyroscope_frame_3axisvector(IntPtr move, PSMove_Frame frame, ref PSMove_3AxisVector out_w);
+        [DllImport("psmoveapi.dll")] public extern static void psmove_get_transformed_gyroscope_frame_3axisvector(IntPtr move, PSMoveFrame frame, ref PSMove3AxisVector out_w);
 
         /**
          * \brief Disconnect from the PS Move and release resources.

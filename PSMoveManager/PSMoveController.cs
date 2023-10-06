@@ -21,9 +21,9 @@ namespace PSMove
         public int Interval { get; set; } = 10;
         public int IntervalOnDisconnected { get; set; } = 1000;
         public bool IsConnected => Model.IsConnected;
-        public PSMove_Connection_Type ConnectionType { get; private set; }
+        public PSMoveConnectionType ConnectionType { get; private set; }
         public bool IsDataAvailable { get; private set; }
-        public PSMove_Battery_Level BatteryLevel { get; private set; }
+        public PSMoveBatteryLevel BatteryLevel { get; private set; }
         public bool IsRunning { get; private set; }
 
         public event EventHandler<PSMoveStateEventArgs> Elapsed;
@@ -43,9 +43,9 @@ namespace PSMove
             {
                 return;
             }
-            if (Model.HasOrientation() != PSMove_Bool.PSMove_True)
+            if (Model.HasOrientation() != PSMoveBool.True)
             {
-                Model.EnableOrientation(PSMove_Bool.PSMove_True);
+                Model.EnableOrientation(PSMoveBool.True);
             }
 
             try
@@ -67,9 +67,9 @@ namespace PSMove
             {
                 return;
             }
-            if (Model.HasOrientation() == PSMove_Bool.PSMove_True)
+            if (Model.HasOrientation() == PSMoveBool.True)
             {
-                Model.EnableOrientation(PSMove_Bool.PSMove_False);
+                Model.EnableOrientation(PSMoveBool.False);
             }
 
             tokenSource?.Cancel();
@@ -106,7 +106,7 @@ namespace PSMove
         {
             Stop();
             Model.Disconnect();
-            ConnectionChanged?.Invoke(this, new PSMoveConnectionChangedEventArgs(Model, false, PSMove_Connection_Type.Conn_Unknown, false));
+            ConnectionChanged?.Invoke(this, new PSMoveConnectionChangedEventArgs(Model, false, PSMoveConnectionType.Unknown, false));
             tokenSource?.Dispose();
         }
 

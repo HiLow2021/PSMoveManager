@@ -24,9 +24,9 @@ namespace PSMove
                 return;
             }
 
-            var isSucceeded = PSMoveUtility.Init(PSMoveAPI.PSMove_Version.PSMOVE_CURRENT_VERSION);
+            var isSucceeded = PSMoveUtility.Init(PSMoveAPI.PSMoveVersion.CurrentVersion);
 
-            if (isSucceeded == PSMove_Bool.PSMove_True)
+            if (isSucceeded == PSMoveBool.True)
             {
                 for (int i = 0; i < desiredConnectionCount; i++)
                 {
@@ -36,7 +36,7 @@ namespace PSMove
                 Controllers = Controllers.Where(x => x.IsConnected).ToList();
             }
 
-            IsOpend = isSucceeded == PSMove_Bool.PSMove_True;
+            IsOpend = isSucceeded == PSMoveBool.True;
         }
 
         public void Close()

@@ -9,15 +9,15 @@ namespace PSMove.EventArgs
     {
         public bool IsConnected { get; }
 
-        public PSMove_Connection_Type ConnectionType { get; }
+        public PSMoveConnectionType ConnectionType { get; }
 
         public bool IsDataAvailable { get; }
 
-        public PSMove_Battery_Level BatteryLevel { get; }
+        public PSMoveBatteryLevel BatteryLevel { get; }
 
         public float Temperature { get; }
 
-        public PSMove_Button Buttons { get; }
+        public PSMoveButton Buttons { get; }
 
         public int Trigger { get; }
 
@@ -25,8 +25,8 @@ namespace PSMove.EventArgs
 
         public Quaternion Rotation { get; }
 
-        public PSMoveStateEventArgs(PSMoveModel model, bool isConnected, PSMove_Connection_Type connectionType,
-            bool isDataAvailable, PSMove_Battery_Level battery, float temperature,
+        public PSMoveStateEventArgs(PSMoveModel model, bool isConnected, PSMoveConnectionType connectionType,
+            bool isDataAvailable, PSMoveBatteryLevel battery, float temperature,
             int buttons, byte trigger, Quaternion rotation) : base(model)
         {
             IsConnected = isConnected;
@@ -34,7 +34,7 @@ namespace PSMove.EventArgs
             IsDataAvailable = isDataAvailable;
             BatteryLevel = battery;
             Temperature = temperature;
-            Buttons = (PSMove_Button)buttons;
+            Buttons = (PSMoveButton)buttons;
             Trigger = trigger;
             Rotation = rotation;
             EulerAngles = QuaternionHelper.ToEulerAnglesInDegrees(Rotation);

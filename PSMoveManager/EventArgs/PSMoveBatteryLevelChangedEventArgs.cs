@@ -6,9 +6,9 @@ namespace PSMove.EventArgs
 {
     public class PSMoveBatteryLevelChangedEventArgs : PSMoveEventArgs
     {
-        public PSMove_Battery_Level BatteryLevel { get; }
+        public PSMoveBatteryLevel BatteryLevel { get; }
 
-        public PSMoveBatteryLevelChangedEventArgs(PSMoveModel model, PSMove_Battery_Level battery) : base(model)
+        public PSMoveBatteryLevelChangedEventArgs(PSMoveModel model, PSMoveBatteryLevel battery) : base(model)
         {
             BatteryLevel = battery;
         }

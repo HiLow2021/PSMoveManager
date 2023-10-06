@@ -55,7 +55,7 @@ namespace PSMoveManager.Demo
                 ChangeToolStripMenuItemChecked(menuItem);
                 StartController(index);
                 ShowConnectionMessage(targetController?.IsConnected ?? false, true);
-                ShowConnectionTypeMessage(targetController?.ConnectionType ?? PSMove_Connection_Type.Conn_Unknown);
+                ShowConnectionTypeMessage(targetController?.ConnectionType ?? PSMoveConnectionType.Unknown);
             }
 
             void SetColor()
@@ -142,7 +142,7 @@ namespace PSMoveManager.Demo
                 frame = 1;
 
                 var message = string.Empty;
-                var buttonFlags = Enum.GetNames(typeof(PSMove_Button));
+                var buttonFlags = Enum.GetNames(typeof(PSMoveButton));
                 var buttonDownFlags = e.Buttons.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
                 var newLine = Environment.NewLine;
 
@@ -197,12 +197,12 @@ namespace PSMoveManager.Demo
             statusStrip1.Invoke(new Action(() => toolStripStatusLabel1.Text = message));
         }
 
-        private void ShowConnectionTypeMessage(PSMove_Connection_Type connectionType)
+        private void ShowConnectionTypeMessage(PSMoveConnectionType connectionType)
         {
             statusStrip1.Invoke(new Action(() => toolStripStatusLabel2.Text = $"接続タイプ : {connectionType}"));
         }
 
-        private void ShowBatteryLevelMessage(PSMove_Battery_Level batteryLevel)
+        private void ShowBatteryLevelMessage(PSMoveBatteryLevel batteryLevel)
         {
             statusStrip1.Invoke(new Action(() => toolStripStatusLabel3.Text = $"残量 : {batteryLevel}"));
         }

@@ -51,12 +51,12 @@ namespace PSMove
             PSMoveAPI.psmove_free_mem(buf);
         }
 
-        public static PSMove_Bool Init(PSMoveAPI.PSMove_Version version)
+        public static PSMoveBool Init(PSMoveAPI.PSMoveVersion version)
         {
             return PSMoveAPI.psmove_init(version);
         }
 
-        public static void SetRemoteConfig(PSMove_RemoteConfig config)
+        public static void SetRemoteConfig(PSMoveRemoteConfig config)
         {
             PSMoveAPI.psmove_set_remote_config(config);
         }
@@ -76,12 +76,12 @@ namespace PSMove
             return PSMoveAPI.psmove_connect_by_id(id);
         }
 
-        public static PSMove_Bool HostPairCustom(string addr)
+        public static PSMoveBool HostPairCustom(string addr)
         {
             return PSMoveAPI.psmove_host_pair_custom(addr);
         }
 
-        public static PSMove_Bool HostPairCustomModel(string addr, PSMove_Model_Type model)
+        public static PSMoveBool HostPairCustomModel(string addr, PSMoveModelType model)
         {
             return PSMoveAPI.psmove_host_pair_custom_model(addr, model);
         }

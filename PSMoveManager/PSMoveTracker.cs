@@ -67,12 +67,12 @@ namespace PSMove
             }
         }
 
-        public void SetAutoUpdateLeds(PSMoveModel model, PSMove_Bool auto_update_leds)
+        public void SetAutoUpdateLeds(PSMoveModel model, PSMoveBool auto_update_leds)
         {
             PSMoveTrackerAPI.psmove_tracker_set_auto_update_leds(Tracker, model.Move, auto_update_leds);
         }
 
-        public PSMove_Bool GetAutoUpdateLeds(PSMoveModel model)
+        public PSMoveBool GetAutoUpdateLeds(PSMoveModel model)
         {
             return PSMoveTrackerAPI.psmove_tracker_get_auto_update_leds(Tracker, model.Move);
         }
@@ -87,37 +87,37 @@ namespace PSMove
             return PSMoveTrackerAPI.psmove_tracker_get_dimming(Tracker);
         }
 
-        public void SetExposure(PSMoveTracker_Exposure exposure)
+        public void SetExposure(PSMoveTrackerExposure exposure)
         {
             PSMoveTrackerAPI.psmove_tracker_set_exposure(Tracker, exposure);
         }
 
-        public PSMoveTracker_Exposure GetExposure()
+        public PSMoveTrackerExposure GetExposure()
         {
             return PSMoveTrackerAPI.psmove_tracker_get_exposure(Tracker);
         }
 
-        public void EnableDeinterlace(PSMove_Bool enabled)
+        public void EnableDeinterlace(PSMoveBool enabled)
         {
             PSMoveTrackerAPI.psmove_tracker_enable_deinterlace(Tracker, enabled);
         }
 
-        public void SetMirror(PSMove_Bool enabled)
+        public void SetMirror(PSMoveBool enabled)
         {
             PSMoveTrackerAPI.psmove_tracker_set_mirror(Tracker, enabled);
         }
 
-        public PSMove_Bool GetMirror()
+        public PSMoveBool GetMirror()
         {
             return PSMoveTrackerAPI.psmove_tracker_get_mirror(Tracker);
         }
 
-        public PSMoveTracker_Status Enable(PSMoveModel model)
+        public PSMoveTrackerStatus Enable(PSMoveModel model)
         {
             return PSMoveTrackerAPI.psmove_tracker_enable(Tracker, model.Move);
         }
 
-        public PSMoveTracker_Status EnableWithColor(PSMoveModel model, byte red, byte green, byte blue)
+        public PSMoveTrackerStatus EnableWithColor(PSMoveModel model, byte red, byte green, byte blue)
         {
             return PSMoveTrackerAPI.psmove_tracker_enable_with_color(Tracker, model.Move, red, green, blue);
         }
@@ -146,7 +146,7 @@ namespace PSMove
             return PSMoveTrackerAPI.psmove_tracker_set_camera_color(Tracker, model.Move, red, green, blue);
         }
 
-        public PSMoveTracker_Status GetStatus(PSMoveModel model)
+        public PSMoveTrackerStatus GetStatus(PSMoveModel model)
         {
             return PSMoveTrackerAPI.psmove_tracker_get_status(Tracker, model.Move);
         }

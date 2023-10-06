@@ -6,11 +6,11 @@ namespace PSMove.EventArgs
 {
     public class PSMoveButtonEventArgs : PSMoveEventArgs
     {
-        public PSMove_Button Buttons { get; }
+        public PSMoveButton Buttons { get; }
 
         public PSMoveButtonEventArgs(PSMoveModel model, int buttons) : base(model)
         {
-            Buttons = (PSMove_Button)buttons;
+            Buttons = (PSMoveButton)buttons;
         }
     }
 }
