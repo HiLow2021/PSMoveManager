@@ -2,7 +2,7 @@
 
 ## 概要
 
-- PS Move API の .NET 環境用実装。
+- PS Move API の .NET 実装。
 - PS Move のセンサー情報の取得や、LED、振動などの操作が可能。
 (USB 接続の場合は、LED と振動操作のみ)
 

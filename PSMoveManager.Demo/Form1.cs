@@ -80,7 +80,6 @@ namespace PSMoveManager.Demo
 
         private void SearchControllers()
         {
-            targetController?.Stop();
             manager.Close();
             manager.Open(desiredConnectionCount);
 
@@ -153,12 +152,12 @@ namespace PSMoveManager.Demo
                 }
 
                 message += newLine;
-                message += $"Trigger Value : {e.Trigger}{newLine}";
+                message += $"TriggerValue : {e.Trigger}{newLine}";
                 message += $"Temperature : {e.Temperature}Åé{newLine}{newLine}";
 
-                message += $"Roll : {e.EulerAngles.Z:F2}{newLine}";
-                message += $"Pitch : {e.EulerAngles.X:F2}{newLine}";
-                message += $"Yaw : {e.EulerAngles.Y:F2}{newLine}";
+                message += $"X : {e.EulerAngles.X:F2}{newLine}";
+                message += $"Y : {e.EulerAngles.Y:F2}{newLine}";
+                message += $"Z : {e.EulerAngles.Z:F2}{newLine}";
 
                 ShowStateMessage(message);
             }
