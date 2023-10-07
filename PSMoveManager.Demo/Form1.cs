@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using PSMove;
 using PSMove.EventArgs;
 
@@ -29,11 +30,7 @@ namespace PSMoveManager.Demo
             Load += (sender, e) =>
             {
                 SearchControllers();
-
-                if (manager.Controllers.Count > 0)
-                {
-                    Start(menuItems[0], 0);
-                }
+                Start(menuItems[0], 0);
             };
             FormClosing += (sender, e) => manager.Dispose();
             exitToolStripMenuItem.Click += (sender, e) => Application.Exit();
@@ -52,8 +49,13 @@ namespace PSMoveManager.Demo
 
             void Start(ToolStripMenuItem menuItem, int index)
             {
+                if (manager.Controllers.Count <= index)
+                {
+                    return;
+                }
+
+                StartController(manager.Controllers[index]);
                 ChangeToolStripMenuItemChecked(menuItem);
-                StartController(index);
                 ShowConnectionMessage(targetController?.IsConnected ?? false, true);
                 ShowConnectionTypeMessage(targetController?.ConnectionType ?? PSMoveConnectionType.Unknown);
             }
@@ -97,15 +99,8 @@ namespace PSMoveManager.Demo
             }
         }
 
-        private void StartController(int index)
+        private void StartController(PSMoveController controller)
         {
-            if (manager.Controllers.Count <= index)
-            {
-                return;
-            }
-
-            var controller = manager.Controllers[index];
-
             if (controller == targetController)
             {
                 return;
@@ -148,7 +143,7 @@ namespace PSMoveManager.Demo
 
                 foreach (var item in buttonFlags)
                 {
-                    message += $"{item} : {buttonDownFlags.Contains(item)}{newLine}";
+                    message += $"{ConvertToMark(item)} : {buttonDownFlags.Contains(item)}{newLine}";
                 }
 
                 message += newLine;
@@ -168,11 +163,11 @@ namespace PSMoveManager.Demo
             }
             void PSMoveController_ButtonDown(object? sender, PSMoveButtonEventArgs e)
             {
-                ShowMessage(e.Buttons.ToString() + " Ç™ " + nameof(PSMoveController.ButtonDown));
+                ShowMessage(ConvertToMark(e.Buttons.ToString()) + " Ç™ " + nameof(PSMoveController.ButtonDown));
             }
             void PSMoveController_ButtonUp(object? sender, PSMoveButtonEventArgs e)
             {
-                ShowMessage(e.Buttons.ToString() + " Ç™ " + nameof(PSMoveController.ButtonUp));
+                ShowMessage(ConvertToMark(e.Buttons.ToString()) + " Ç™ " + nameof(PSMoveController.ButtonUp));
             }
             void PSMoveController_BatteryLevelChanged(object? sender, PSMoveBatteryLevelChangedEventArgs e)
             {
@@ -204,7 +199,21 @@ namespace PSMoveManager.Demo
 
         private void ShowBatteryLevelMessage(PSMoveBatteryLevel batteryLevel)
         {
-            statusStrip1.Invoke(new Action(() => toolStripStatusLabel3.Text = $"écó  : {batteryLevel}"));
+            statusStrip1.Invoke(new Action(() => toolStripStatusLabel3.Text = $"écó  : {ConvertToPercent(batteryLevel.ToString())}"));
+        }
+
+        private static string ConvertToMark(string source)
+        {
+            return source
+                .Replace("triangle", "Å¢", StringComparison.OrdinalIgnoreCase)
+                .Replace("circle", "Åõ", StringComparison.OrdinalIgnoreCase)
+                .Replace("cross", "Å~", StringComparison.OrdinalIgnoreCase)
+                .Replace("square", "Å†", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static string ConvertToPercent(string source)
+        {
+            return Regex.Replace(source, @"percent(\d+)", "$1Åì", RegexOptions.IgnoreCase);
         }
     }
 }
