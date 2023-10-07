@@ -9,7 +9,7 @@ namespace PSMove
     public class PSMoveManager : IDisposable
     {
         public IList<PSMoveController> Controllers { get; private set; } = new List<PSMoveController>();
-        public bool IsOpend { get; private set; }
+        public bool IsOpened { get; private set; }
 
         public PSMoveManager() { }
         public PSMoveManager(int desiredConnectionCount)
@@ -19,7 +19,7 @@ namespace PSMove
 
         public void Open(int desiredConnectionCount = 1)
         {
-            if (IsOpend)
+            if (IsOpened)
             {
                 return;
             }
@@ -36,12 +36,12 @@ namespace PSMove
                 Controllers = Controllers.Where(x => x.IsConnected).ToList();
             }
 
-            IsOpend = isSucceeded == PSMoveBool.True;
+            IsOpened = isSucceeded == PSMoveBool.True;
         }
 
         public void Close()
         {
-            if (!IsOpend)
+            if (!IsOpened)
             {
                 return;
             }
@@ -52,7 +52,7 @@ namespace PSMove
             }
 
             Controllers.Clear();
-            IsOpend = false;
+            IsOpened = false;
         }
 
         public void Dispose()
