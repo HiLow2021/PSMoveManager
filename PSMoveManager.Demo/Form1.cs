@@ -154,7 +154,7 @@ namespace PSMoveManager.Demo
                 }
 
                 message += $"Trigger : {e.Trigger}{newLine}";
-                message += $"Temperature : {e.Temperature}{newLine}";
+                message += $"Temperature : {e.TemperatureC}{newLine}";
 
                 ShowStateMessage(message);
                 Update3d(e.EulerAngles);
