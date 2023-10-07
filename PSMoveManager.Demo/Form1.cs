@@ -56,10 +56,10 @@ namespace PSMoveManager.Demo
 
                 StartController(manager.Controllers[index]);
                 ChangeToolStripMenuItemChecked(menuItem);
+                ShowStateMessage(string.Empty);
                 ShowConnectionMessage(targetController?.ConnectionType, targetController?.IsConnected ?? false, targetController?.IsDataAvailable ?? false);
                 ShowConnectionTypeMessage(targetController?.ConnectionType);
                 ShowBatteryLevelMessage(targetController?.ConnectionType, targetController?.BatteryLevel);
-                ShowStateMessage(string.Empty);
             }
 
             void SetColor()
