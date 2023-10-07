@@ -11,7 +11,10 @@ namespace PSMove
 
         public PSMoveFusion(PSMoveTracker tracker, float z_near, float z_far)
         {
-            Fusion = PSMoveUtility.FusionNew(tracker, z_near, z_far);
+            if (tracker.IsConnected)
+            {
+                Fusion = PSMoveUtility.FusionNew(tracker, z_near, z_far);
+            }
         }
 
         public IntPtr GetProjectionMatrix()

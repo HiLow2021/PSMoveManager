@@ -42,21 +42,21 @@ namespace PSMove
     } /*!< Structure for storing RGB image data */
 
     /*! Status of the tracker */
-    public enum PSMoveTracker_Status
+    public enum PSMoveTrackerStatus
     {
-        Tracker_NOT_CALIBRATED, /*!< Controller not registered with tracker */
-        Tracker_CALIBRATION_ERROR, /*!< Calibration failed (check lighting, visibility) */
-        Tracker_CALIBRATED, /*!< Color calibration successful, not currently tracking */
-        Tracker_TRACKING, /*!< Calibrated and successfully tracked in the camera */
+        NotCalibrated, /*!< Controller not registered with tracker */
+        CalibrationError, /*!< Calibration failed (check lighting, visibility) */
+        Calibrated, /*!< Color calibration successful, not currently tracking */
+        Tracking, /*!< Calibrated and successfully tracked in the camera */
     };
 
     /*! Exposure modes */
-    public enum PSMoveTracker_Exposure
+    public enum PSMoveTrackerExposure
     {
-        Exposure_LOW, /*!< Very low exposure: Good tracking, no environment visible */
-        Exposure_MEDIUM, /*!< Middle ground: Good tracking, environment visibile */
-        Exposure_HIGH, /*!< High exposure: Fair tracking, but good environment */
-        Exposure_INVALID, /*!< Invalid exposure value (for returning failures) */
+        Low, /*!< Very low exposure: Good tracking, no environment visible */
+        Medium, /*!< Middle ground: Good tracking, environment visibile */
+        High, /*!< High exposure: Fair tracking, but good environment */
+        Invalid, /*!< Invalid exposure value (for returning failures) */
     };
 
     /* A structure to retain the tracker settings. Typically these do not change after init & calib.*/
@@ -67,15 +67,15 @@ namespace PSMove
         int camera_frame_width;                     /* [0=auto] */
         int camera_frame_height;                    /* [0=auto] */
         int camera_frame_rate;                      /* [0=auto] */
-        PSMove_Bool camera_auto_gain;          /* [PSMove_False] */
+        PSMoveBool camera_auto_gain;          /* [PSMove_False] */
         int camera_gain;                            /* [0] [0,0xFFFF] */
-        PSMove_Bool camera_auto_white_balance; /* [PSMove_False] */
+        PSMoveBool camera_auto_white_balance; /* [PSMove_False] */
         int camera_exposure;                        /* [(255 * 15) / 0xFFFF] [0,0xFFFF] */
         int camera_brightness;                      /* [0] [0,0xFFFF] */
-        PSMove_Bool camera_mirror;             /* [PSMove_True] mirror camera image horizontally */
+        PSMoveBool camera_mirror;             /* [PSMove_True] mirror camera image horizontally */
 
         /* Settings for camera calibration process */
-        PSMoveTracker_Exposure exposure_mode;  /* [Exposure_LOW] exposure mode for setting target luminance */
+        PSMoveTrackerExposure exposure_mode;  /* [Exposure_LOW] exposure mode for setting target luminance */
         int calibration_blink_delay;                /* [200] number of milliseconds to wait between a blink  */
         int calibration_diff_t;                     /* [20] during calibration, all grey values in the diff image below this value are set to black  */
         int calibration_min_size;                   /* [50] minimum size of the estimated glowing sphere during calibration process (in pixel)  */
@@ -241,7 +241,7 @@ namespace PSMove
          *                         will take care of updating the LEDs
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static void psmove_tracker_set_auto_update_leds(IntPtr tracker, IntPtr move, PSMove_Bool auto_update_leds);
+        public extern static void psmove_tracker_set_auto_update_leds(IntPtr tracker, IntPtr move, PSMoveBool auto_update_leds);
 
         /**
          * \brief Check if the LEDs of a controller are updated automatically
@@ -256,7 +256,7 @@ namespace PSMove
          *         updated automatically, \ref PSMove_False otherwise
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static PSMove_Bool psmove_tracker_get_auto_update_leds(IntPtr tracker, IntPtr move);
+        public extern static PSMoveBool psmove_tracker_get_auto_update_leds(IntPtr tracker, IntPtr move);
 
         /**
          * \brief Set the LED dimming value for all controller
@@ -295,7 +295,7 @@ namespace PSMove
          * \param exposure One of the \ref PSMoveTracker_Exposure values
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static void psmove_tracker_set_exposure(IntPtr tracker, PSMoveTracker_Exposure exposure);
+        public extern static void psmove_tracker_set_exposure(IntPtr tracker, PSMoveTrackerExposure exposure);
 
         /**
          * \brief Get the desired camera exposure mode
@@ -307,7 +307,7 @@ namespace PSMove
          * \return One of the \ref PSMoveTracker_Exposure values
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static PSMoveTracker_Exposure psmove_tracker_get_exposure(IntPtr tracker);
+        public extern static PSMoveTrackerExposure psmove_tracker_get_exposure(IntPtr tracker);
 
         /**
          * \brief Enable or disable camera image deinterlacing (line doubling)
@@ -323,7 +323,7 @@ namespace PSMove
          *                \ref PSMove_False to disable deinterlacing (default)
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static void psmove_tracker_enable_deinterlace(IntPtr tracker, PSMove_Bool enabled);
+        public extern static void psmove_tracker_enable_deinterlace(IntPtr tracker, PSMoveBool enabled);
 
         /**
          * \brief Enable or disable horizontal camera image mirroring
@@ -339,7 +339,7 @@ namespace PSMove
          *                \ref PSMove_False to leave the image as-is (default)
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static void psmove_tracker_set_mirror(IntPtr tracker, PSMove_Bool enabled);
+        public extern static void psmove_tracker_set_mirror(IntPtr tracker, PSMoveBool enabled);
 
         /**
          * \brief Query the current camera image mirroring state
@@ -352,7 +352,7 @@ namespace PSMove
          *         \ref PSMove_False if mirroring is disabled
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static PSMove_Bool psmove_tracker_get_mirror(IntPtr tracker);
+        public extern static PSMoveBool psmove_tracker_get_mirror(IntPtr tracker);
 
         /**
          * \brief Enable tracking of a motion controller
@@ -369,7 +369,7 @@ namespace PSMove
          * \return \ref Tracker_CALIBRATION_ERROR if calibration failed
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static PSMoveTracker_Status psmove_tracker_enable(IntPtr tracker, IntPtr move);
+        public extern static PSMoveTrackerStatus psmove_tracker_enable(IntPtr tracker, IntPtr move);
 
         /**
          * \brief Enable tracking with a custom sphere color
@@ -390,7 +390,7 @@ namespace PSMove
          * \return \ref Tracker_CALIBRATION_ERROR if calibration failed
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static PSMoveTracker_Status psmove_tracker_enable_with_color(IntPtr tracker, IntPtr move, byte r, byte g, byte b);
+        public extern static PSMoveTrackerStatus psmove_tracker_enable_with_color(IntPtr tracker, IntPtr move, byte r, byte g, byte b);
 
         /**
          * \brief Disable tracking of a motion controller
@@ -482,7 +482,7 @@ namespace PSMove
          * \return One of the \ref PSMoveTracker_Status values
          **/
         [DllImport("psmoveapi_tracker.dll")]
-        public extern static PSMoveTracker_Status psmove_tracker_get_status(IntPtr tracker, IntPtr move);
+        public extern static PSMoveTrackerStatus psmove_tracker_get_status(IntPtr tracker, IntPtr move);
 
         /**
          * \brief Retrieve the next image from the camera

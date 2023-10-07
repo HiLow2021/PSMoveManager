@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -7,40 +8,35 @@ namespace PSMove
 {
     public class PSMoveManager : IDisposable
     {
-        public IList<PSMoveModel> Models { get; private set; } = new List<PSMoveModel>();
+        public IList<PSMoveController> Controllers { get; private set; } = new List<PSMoveController>();
         public bool IsOpend { get; private set; }
 
         public PSMoveManager() { }
-        public PSMoveManager(int expectedConnectionCount)
+        public PSMoveManager(int desiredConnectionCount)
         {
-            Open(expectedConnectionCount);
+            Open(desiredConnectionCount);
         }
 
-        public void Open(int expectedConnectionCount = 1)
+        public void Open(int desiredConnectionCount = 1)
         {
             if (IsOpend)
             {
                 return;
             }
 
-            var isSucceeded = PSMoveUtility.Init(PSMoveAPI.PSMove_Version.PSMOVE_CURRENT_VERSION);
+            var isSucceeded = PSMoveUtility.Init(PSMoveAPI.PSMoveVersion.CurrentVersion);
 
-            if (isSucceeded == PSMove_Bool.PSMove_True)
+            if (isSucceeded == PSMoveBool.True)
             {
-                for (int i = 0; i < expectedConnectionCount; i++)
+                for (int i = 0; i < desiredConnectionCount; i++)
                 {
-                    Models.Add(new PSMoveModel(i));
+                    Controllers.Add(new PSMoveController(new PSMoveModel(i)));
                 }
 
-                Models = Models.Where(x => x.IsConnected).ToList();
-
-                for (int i = 0; i < Models.Count; i++)
-                {
-                    Models[i].PSMoveID = i;
-                }
+                Controllers = Controllers.Where(x => x.IsConnected).ToList();
             }
 
-            IsOpend = isSucceeded == PSMove_Bool.PSMove_True;
+            IsOpend = isSucceeded == PSMoveBool.True;
         }
 
         public void Close()
@@ -50,12 +46,12 @@ namespace PSMove
                 return;
             }
 
-            foreach (var item in Models)
+            foreach (var item in Controllers)
             {
                 item.Dispose();
             }
 
-            Models.Clear();
+            Controllers.Clear();
             IsOpend = false;
         }
 

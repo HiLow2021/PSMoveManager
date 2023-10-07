@@ -3,7 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMoveManager", "PSMoveManager\PSMoveManager.csproj", "{AB3C894B-BA2E-4B4B-A390-296BD332D5FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSMoveManager", "PSMoveManager\PSMoveManager.csproj", "{AB3C894B-BA2E-4B4B-A390-296BD332D5FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSMoveManager.Demo", "PSMoveManager.Demo\PSMoveManager.Demo.csproj", "{C34256FA-11D1-4DEF-9C37-E81F93206FA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{8339E720-1ADF-4391-9ED9-40C2952750D6}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image", "Image", "{A22DADC4-505B-4E55-B6F0-9065F035375F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +24,16 @@ Global
 		{AB3C894B-BA2E-4B4B-A390-296BD332D5FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB3C894B-BA2E-4B4B-A390-296BD332D5FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB3C894B-BA2E-4B4B-A390-296BD332D5FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34256FA-11D1-4DEF-9C37-E81F93206FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34256FA-11D1-4DEF-9C37-E81F93206FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34256FA-11D1-4DEF-9C37-E81F93206FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34256FA-11D1-4DEF-9C37-E81F93206FA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A22DADC4-505B-4E55-B6F0-9065F035375F} = {8339E720-1ADF-4391-9ED9-40C2952750D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {436EFC5A-8347-4E39-8929-FE92CFCF46E5}
