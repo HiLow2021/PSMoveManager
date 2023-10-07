@@ -8,7 +8,7 @@ namespace PSMoveManager.Demo
     public partial class Form1 : Form
     {
         private readonly int desiredConnectionCount = 5;
-        private readonly int frameCut = 10;
+        private readonly int frameCut = 4;
         private readonly ToolStripMenuItem[] menuItems;
         private readonly PSMove.PSMoveManager manager = new();
         private PSMoveController? targetController;
@@ -59,6 +59,7 @@ namespace PSMoveManager.Demo
                 ShowConnectionMessage(targetController?.ConnectionType, targetController?.IsConnected ?? false, targetController?.IsDataAvailable ?? false);
                 ShowConnectionTypeMessage(targetController?.ConnectionType);
                 ShowBatteryLevelMessage(targetController?.ConnectionType, targetController?.BatteryLevel);
+                ShowStateMessage(string.Empty);
             }
 
             void SetColor()
@@ -183,7 +184,7 @@ namespace PSMoveManager.Demo
 
         private void ShowStateMessage(string message)
         {
-            textBox2.Invoke(new Action(() => textBox2.Text = message));
+            label6.Invoke(new Action(() => label6.Text = message));
         }
 
         private void ShowConnectionMessage(PSMoveConnectionType? connectionType, bool isConnected, bool isDataAvailable)

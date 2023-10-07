@@ -41,7 +41,6 @@
             this.controller5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -59,6 +58,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label6 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -171,17 +171,6 @@
             this.button3.TabIndex = 9;
             this.button3.Text = "ログクリア";
             this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(514, 27);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(258, 382);
-            this.textBox2.TabIndex = 7;
             // 
             // button2
             // 
@@ -400,15 +389,25 @@
             this.trackBar1.TickFrequency = 15;
             this.trackBar1.Value = 128;
             // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label6.Location = new System.Drawing.Point(514, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(258, 382);
+            this.label6.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 467);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
@@ -448,7 +447,6 @@
         private ToolStripMenuItem controller3ToolStripMenuItem;
         private ToolStripMenuItem controller4ToolStripMenuItem;
         private ToolStripMenuItem controller5ToolStripMenuItem;
-        private TextBox textBox2;
         private Button button2;
         private Button button1;
         private StatusStrip statusStrip1;
@@ -466,5 +464,6 @@
         private Label label2;
         private NumericUpDown numericUpDown1;
         private ToolStripStatusLabel toolStripStatusLabel3;
+        private Label label6;
     }
 }
