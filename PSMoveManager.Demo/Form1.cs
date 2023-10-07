@@ -194,7 +194,7 @@ namespace PSMoveManager.Demo
             cube.RotateZ = -v.Y;
 
             pictureBox1.Image?.Dispose();
-            pictureBox1.Image = cube.DrawCube(new Point(pictureBox1.Width / 2, pictureBox1.Height / 2));
+            pictureBox1.Image = cube.DrawCube(new Point(pictureBox1.Width / 2, pictureBox1.Height / 2), Pens.Aquamarine);
         }
 
         private void ShowMessage(string message)
