@@ -18,6 +18,7 @@ namespace PSMove
 
         public PSMoveModel Model { get; }
 
+        public string SerialNumber { get; private set; }
         public int Interval { get; set; } = 10;
         public int IntervalOnDisconnected { get; set; } = 1000;
         public bool IsConnected => Model.IsConnected;
@@ -35,6 +36,8 @@ namespace PSMove
         public PSMoveController(PSMoveModel model)
         {
             Model = model;
+            SerialNumber = model.GetSerial();
+            ConnectionType = model.ConnectionType();
         }
 
         public void Run()
@@ -113,7 +116,6 @@ namespace PSMove
         private async Task PollingTask()
         {
             var previousIsConnected = IsConnected;
-            var previousConnectionType = ConnectionType;
             var previousIsAvailable = IsDataAvailable;
             var previousBatteryLevel = BatteryLevel;
 
@@ -122,10 +124,9 @@ namespace PSMove
                 try
                 {
                     IsDataAvailable = Model.Poll() != 0;
-                    ConnectionType = Model.ConnectionType();
                     BatteryLevel = Model.GetBattery();
 
-                    if (previousIsConnected != IsConnected || previousConnectionType != ConnectionType || previousIsAvailable != IsDataAvailable)
+                    if (previousIsConnected != IsConnected || previousIsAvailable != IsDataAvailable)
                     {
                         ConnectionChanged?.Invoke(this, new PSMoveConnectionChangedEventArgs(Model, IsConnected, ConnectionType, IsDataAvailable));
                     }
@@ -135,7 +136,6 @@ namespace PSMove
                     }
 
                     previousIsConnected = IsConnected;
-                    previousConnectionType = ConnectionType;
                     previousIsAvailable = IsDataAvailable;
                     previousBatteryLevel = BatteryLevel;
 
@@ -159,7 +159,7 @@ namespace PSMove
                         Model.GetOrientation(out float w, out float x, out float y, out float z);
                         var rotation = new Quaternion(x, y, z, w);
 
-                        Elapsed?.Invoke(this, new PSMoveStateEventArgs(Model, IsConnected, ConnectionType, IsDataAvailable, battery, temperature, buttons, trigger, rotation));
+                        Elapsed?.Invoke(this, new PSMoveStateEventArgs(Model, SerialNumber, IsConnected, ConnectionType, IsDataAvailable, battery, temperature, buttons, trigger, rotation));
 
                         await Task.Delay(Interval, token);
                     }

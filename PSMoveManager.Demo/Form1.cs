@@ -188,14 +188,14 @@ namespace PSMoveManager.Demo
 
         private void ShowConnectionMessage(PSMoveConnectionType? connectionType, bool isConnected, bool isDataAvailable)
         {
-            var message = isConnected && (isDataAvailable || connectionType == PSMoveConnectionType.USB) ? "コントローラ接続中" : "コントローラが接続されていません";
+            var message = isConnected ? (isDataAvailable || connectionType == PSMoveConnectionType.USB) ? "コントローラ接続中" : "コントローラ通信切断中" : "コントローラが接続されていません";
 
             statusStrip1.Invoke(new Action(() => toolStripStatusLabel1.Text = message));
         }
 
         private void ShowConnectionTypeMessage(PSMoveConnectionType? connectionType)
         {
-            var message = connectionType != PSMoveConnectionType.Unknown ? $"接続タイプ : {connectionType}" : string.Empty;
+            var message = (connectionType != null && connectionType != PSMoveConnectionType.Unknown) ? $"接続タイプ : {connectionType}" : string.Empty;
 
             statusStrip1.Invoke(new Action(() => toolStripStatusLabel2.Text = message));
         }

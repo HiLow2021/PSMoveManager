@@ -7,6 +7,8 @@ namespace PSMove.EventArgs
 {
     public class PSMoveStateEventArgs : PSMoveEventArgs
     {
+        public string SerialNumber { get; }
+
         public bool IsConnected { get; }
 
         public PSMoveConnectionType ConnectionType { get; }
@@ -25,10 +27,11 @@ namespace PSMove.EventArgs
 
         public Quaternion Rotation { get; }
 
-        public PSMoveStateEventArgs(PSMoveModel model, bool isConnected, PSMoveConnectionType connectionType,
+        public PSMoveStateEventArgs(PSMoveModel model, string serial, bool isConnected, PSMoveConnectionType connectionType,
             bool isDataAvailable, PSMoveBatteryLevel battery, float temperature,
             int buttons, byte trigger, Quaternion rotation) : base(model)
         {
+            SerialNumber = serial;
             IsConnected = isConnected;
             ConnectionType = connectionType;
             IsDataAvailable = isDataAvailable;
