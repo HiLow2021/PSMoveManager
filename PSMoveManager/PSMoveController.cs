@@ -78,6 +78,11 @@ namespace PSMove
             tokenSource?.Cancel();
         }
 
+        public void ResetOrientation()
+        {
+            Model.ResetOrientation();
+        }
+
         public void SetLeds(byte red, byte green, byte blue)
         {
             SetLedsAndVibration(red, green, blue, 0);
