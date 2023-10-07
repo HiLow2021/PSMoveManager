@@ -376,7 +376,7 @@ namespace Math3D
                 }
             }
 
-            public Bitmap DrawCube(Point drawOrigin, Pen wireColor)
+            public Bitmap DrawCube(Point drawOrigin, Pen wirePen)
             {
                 //Get the corresponding 2D
                 Update2DPoints(drawOrigin);
@@ -427,10 +427,10 @@ namespace Math3D
 
                     if (drawWires)
                     {
-                        g.DrawLine(wireColor, faces[i].Corners2D[0], faces[i].Corners2D[1]);
-                        g.DrawLine(wireColor, faces[i].Corners2D[1], faces[i].Corners2D[2]);
-                        g.DrawLine(wireColor, faces[i].Corners2D[2], faces[i].Corners2D[3]);
-                        g.DrawLine(wireColor, faces[i].Corners2D[3], faces[i].Corners2D[0]);
+                        g.DrawLine(wirePen, faces[i].Corners2D[0], faces[i].Corners2D[1]);
+                        g.DrawLine(wirePen, faces[i].Corners2D[1], faces[i].Corners2D[2]);
+                        g.DrawLine(wirePen, faces[i].Corners2D[2], faces[i].Corners2D[3]);
+                        g.DrawLine(wirePen, faces[i].Corners2D[3], faces[i].Corners2D[0]);
                     }
                 }
 
