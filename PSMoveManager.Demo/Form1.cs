@@ -180,9 +180,10 @@ namespace PSMoveManager.Demo
 
         private void Update3d(Vector3? eulerAngles)
         {
+            pictureBox1.Image?.Dispose();
+
             if (eulerAngles is not Vector3 v)
             {
-                pictureBox1.Image?.Dispose();
                 pictureBox1.Image = null;
 
                 return;
@@ -192,8 +193,6 @@ namespace PSMoveManager.Demo
             cube.RotateX = v.X;
             cube.RotateY = -v.Z;
             cube.RotateZ = -v.Y;
-
-            pictureBox1.Image?.Dispose();
             pictureBox1.Image = cube.DrawCube(new Point(pictureBox1.Width / 2, pictureBox1.Height / 2), Pens.Aquamarine);
         }
 
