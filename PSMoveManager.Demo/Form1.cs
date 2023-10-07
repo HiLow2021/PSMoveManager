@@ -56,8 +56,9 @@ namespace PSMoveManager.Demo
 
                 StartController(manager.Controllers[index]);
                 ChangeToolStripMenuItemChecked(menuItem);
-                ShowConnectionMessage(targetController?.IsConnected ?? false, true);
-                ShowConnectionTypeMessage(targetController?.ConnectionType ?? PSMoveConnectionType.Unknown);
+                ShowConnectionMessage(targetController?.ConnectionType, targetController?.IsConnected ?? false, targetController?.IsDataAvailable ?? false);
+                ShowConnectionTypeMessage(targetController?.ConnectionType);
+                ShowBatteryLevelMessage(targetController?.ConnectionType, targetController?.BatteryLevel);
             }
 
             void SetColor()
@@ -158,7 +159,7 @@ namespace PSMoveManager.Demo
             }
             void PSMoveController_ConnectionChanged(object? sender, PSMoveConnectionChangedEventArgs e)
             {
-                ShowConnectionMessage(e.IsConnected, e.IsDataAvailable);
+                ShowConnectionMessage(targetController?.ConnectionType, e.IsConnected, e.IsDataAvailable);
                 ShowConnectionTypeMessage(e.ConnectionType);
             }
             void PSMoveController_ButtonDown(object? sender, PSMoveButtonEventArgs e)
@@ -171,7 +172,7 @@ namespace PSMoveManager.Demo
             }
             void PSMoveController_BatteryLevelChanged(object? sender, PSMoveBatteryLevelChangedEventArgs e)
             {
-                ShowBatteryLevelMessage(e.BatteryLevel);
+                ShowBatteryLevelMessage(targetController?.ConnectionType, e.BatteryLevel);
             }
         }
 
@@ -185,21 +186,25 @@ namespace PSMoveManager.Demo
             textBox2.Invoke(new Action(() => textBox2.Text = message));
         }
 
-        private void ShowConnectionMessage(bool isConnected, bool isDataAvailable)
+        private void ShowConnectionMessage(PSMoveConnectionType? connectionType, bool isConnected, bool isDataAvailable)
         {
-            var message = isConnected ? isDataAvailable ? "コントローラ接続中" : "データが取得できません" : "コントローラが接続されていません";
+            var message = isConnected && (isDataAvailable || connectionType == PSMoveConnectionType.USB) ? "コントローラ接続中" : "コントローラが接続されていません";
 
             statusStrip1.Invoke(new Action(() => toolStripStatusLabel1.Text = message));
         }
 
-        private void ShowConnectionTypeMessage(PSMoveConnectionType connectionType)
+        private void ShowConnectionTypeMessage(PSMoveConnectionType? connectionType)
         {
-            statusStrip1.Invoke(new Action(() => toolStripStatusLabel2.Text = $"接続タイプ : {connectionType}"));
+            var message = connectionType != PSMoveConnectionType.Unknown ? $"接続タイプ : {connectionType}" : string.Empty;
+
+            statusStrip1.Invoke(new Action(() => toolStripStatusLabel2.Text = message));
         }
 
-        private void ShowBatteryLevelMessage(PSMoveBatteryLevel batteryLevel)
+        private void ShowBatteryLevelMessage(PSMoveConnectionType? connectionType, PSMoveBatteryLevel? batteryLevel)
         {
-            statusStrip1.Invoke(new Action(() => toolStripStatusLabel3.Text = $"残量 : {ConvertToPercent(batteryLevel.ToString())}"));
+            var message = connectionType == PSMoveConnectionType.Bluetooth ? $"残量 : {ConvertToPercent(batteryLevel.ToString())}" : string.Empty;
+
+            statusStrip1.Invoke(new Action(() => toolStripStatusLabel3.Text = message));
         }
 
         private static string ConvertToMark(string source)
@@ -211,9 +216,9 @@ namespace PSMoveManager.Demo
                 .Replace("square", "□", StringComparison.OrdinalIgnoreCase);
         }
 
-        private static string ConvertToPercent(string source)
+        private static string ConvertToPercent(string? source)
         {
-            return Regex.Replace(source, @"percent(\d+)", "$1％", RegexOptions.IgnoreCase);
+            return Regex.Replace(source ?? string.Empty, @"percent(\d+)", "$1％", RegexOptions.IgnoreCase);
         }
     }
 }
