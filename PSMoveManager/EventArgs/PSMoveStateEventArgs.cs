@@ -17,7 +17,9 @@ namespace PSMove.EventArgs
 
         public PSMoveBatteryLevel BatteryLevel { get; }
 
-        public float Temperature { get; }
+        public float TemperatureF { get; }
+
+        public float TemperatureC { get; }
 
         public PSMoveButton Buttons { get; }
 
@@ -28,7 +30,7 @@ namespace PSMove.EventArgs
         public Quaternion Rotation { get; }
 
         public PSMoveStateEventArgs(PSMoveModel model, string serial, bool isConnected, PSMoveConnectionType connectionType,
-            bool isDataAvailable, PSMoveBatteryLevel battery, float temperature,
+            bool isDataAvailable, PSMoveBatteryLevel battery, float temperatureF, float temperatureC,
             int buttons, byte trigger, Quaternion rotation) : base(model)
         {
             SerialNumber = serial;
@@ -36,7 +38,8 @@ namespace PSMove.EventArgs
             ConnectionType = connectionType;
             IsDataAvailable = isDataAvailable;
             BatteryLevel = battery;
-            Temperature = temperature;
+            TemperatureF = temperatureF;
+            TemperatureC = temperatureC;
             Buttons = (PSMoveButton)buttons;
             Trigger = trigger;
             Rotation = rotation;

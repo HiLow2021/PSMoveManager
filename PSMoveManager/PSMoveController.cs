@@ -158,13 +158,14 @@ namespace PSMove
                         }
 
                         var battery = Model.GetBattery();
-                        var temperature = Model.GetTemperatureInCelsius();
+                        var temperatureF = Model.GetTemperature();
+                        var temperatureC = Model.GetTemperatureInCelsius();
                         var buttons = Model.GetButtons();
                         var trigger = Model.GetTrigger();
                         Model.GetOrientation(out float w, out float x, out float y, out float z);
                         var rotation = new Quaternion(x, y, z, w);
 
-                        Elapsed?.Invoke(this, new PSMoveStateEventArgs(Model, SerialNumber, IsConnected, ConnectionType, IsDataAvailable, battery, temperature, buttons, trigger, rotation));
+                        Elapsed?.Invoke(this, new PSMoveStateEventArgs(Model, SerialNumber, IsConnected, ConnectionType, IsDataAvailable, battery, temperatureF, temperatureC, buttons, trigger, rotation));
 
                         await Task.Delay(Interval, token);
                     }
