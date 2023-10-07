@@ -1,7 +1,9 @@
 using System;
+using System.Numerics;
 using System.Text.RegularExpressions;
 using PSMove;
 using PSMove.EventArgs;
+using static Math3D.Math3D;
 
 namespace PSMoveManager.Demo
 {
@@ -11,6 +13,7 @@ namespace PSMoveManager.Demo
         private readonly int frameCut = 4;
         private readonly ToolStripMenuItem[] menuItems;
         private readonly PSMove.PSMoveManager manager = new();
+        private readonly Cube cube = new(60, 120, 60);
         private PSMoveController? targetController;
         private int frame = 0;
 
@@ -45,7 +48,8 @@ namespace PSMoveManager.Demo
             numericUpDown3.ValueChanged += (sender, e) => SetColor();
             button1.Click += (sender, e) => targetController?.SetLeds(label1.BackColor);
             button2.Click += (sender, e) => targetController?.SetVibration((byte)trackBar1.Value);
-            button3.Click += (sender, e) => textBox1.Clear();
+            button3.Click += (sender, e) => targetController?.ResetOrientation();
+            button4.Click += (sender, e) => textBox1.Clear();
 
             void Start(ToolStripMenuItem menuItem, int index)
             {
@@ -60,6 +64,7 @@ namespace PSMoveManager.Demo
                 ShowConnectionMessage(targetController?.ConnectionType, targetController?.IsConnected ?? false, targetController?.IsDataAvailable ?? false);
                 ShowConnectionTypeMessage(targetController?.ConnectionType);
                 ShowBatteryLevelMessage(targetController?.ConnectionType, targetController?.BatteryLevel);
+                Update3d(null);
             }
 
             void SetColor()
@@ -139,7 +144,7 @@ namespace PSMoveManager.Demo
                 frame = 1;
 
                 var message = string.Empty;
-                var buttonFlags = Enum.GetNames(typeof(PSMoveButton));
+                var buttonFlags = Enum.GetNames(typeof(PSMoveButton)).Where(x => string.Compare(x, "trigger", StringComparison.OrdinalIgnoreCase) != 0);
                 var buttonDownFlags = e.Buttons.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
                 var newLine = Environment.NewLine;
 
@@ -148,15 +153,11 @@ namespace PSMoveManager.Demo
                     message += $"{ConvertToMark(item)} : {buttonDownFlags.Contains(item)}{newLine}";
                 }
 
-                message += newLine;
-                message += $"TriggerValue : {e.Trigger}{newLine}";
-                message += $"Temperature : {e.Temperature}Åé{newLine}{newLine}";
-
-                message += $"X : {e.EulerAngles.X:F2}{newLine}";
-                message += $"Y : {e.EulerAngles.Y:F2}{newLine}";
-                message += $"Z : {e.EulerAngles.Z:F2}{newLine}";
+                message += $"Trigger : {e.Trigger}{newLine}";
+                message += $"Temperature : {e.Temperature}Åé{newLine}";
 
                 ShowStateMessage(message);
+                Update3d(e.EulerAngles);
             }
             void PSMoveController_ConnectionChanged(object? sender, PSMoveConnectionChangedEventArgs e)
             {
@@ -175,6 +176,25 @@ namespace PSMoveManager.Demo
             {
                 ShowBatteryLevelMessage(targetController?.ConnectionType, e.BatteryLevel);
             }
+        }
+
+        private void Update3d(Vector3? eulerAngles)
+        {
+            if (eulerAngles is not Vector3 v)
+            {
+                pictureBox1.Image?.Dispose();
+                pictureBox1.Image = null;
+
+                return;
+            }
+
+            cube.InitializeCube();
+            cube.RotateX = v.X;
+            cube.RotateY = -v.Z;
+            cube.RotateZ = -v.Y;
+
+            pictureBox1.Image?.Dispose();
+            pictureBox1.Image = cube.DrawCube(new Point(pictureBox1.Width / 2, pictureBox1.Height / 2));
         }
 
         private void ShowMessage(string message)
