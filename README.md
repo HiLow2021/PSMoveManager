@@ -30,7 +30,7 @@
 PS Move を Windows 上で扱うための 非公式 API。
 
 - ドキュメント
-https://psmoveapi.readthedocs.io/en/latest/camera.html
+https://psmoveapi.readthedocs.io/en/latest/index.html
 - GitHub
 https://github.com/thp/psmoveapi/tree/master
 

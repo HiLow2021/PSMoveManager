@@ -32,12 +32,17 @@ namespace PSMoveManager.Demo
 
             Load += (sender, e) =>
             {
+                InitializeMessage();
                 SearchControllers();
                 Start(menuItems[0], 0);
             };
             FormClosing += (sender, e) => manager.Dispose();
             exitToolStripMenuItem.Click += (sender, e) => Application.Exit();
-            detectToolStripMenuItem.Click += (sender, e) => SearchControllers();
+            detectToolStripMenuItem.Click += (sender, e) =>
+            {
+                InitializeMessage();
+                SearchControllers();
+            };
             controller1ToolStripMenuItem.Click += (sender, e) => Start(menuItems[0], 0);
             controller2ToolStripMenuItem.Click += (sender, e) => Start(menuItems[1], 1);
             controller3ToolStripMenuItem.Click += (sender, e) => Start(menuItems[2], 2);
@@ -60,11 +65,10 @@ namespace PSMoveManager.Demo
 
                 StartController(manager.Controllers[index]);
                 ChangeToolStripMenuItemChecked(menuItem);
-                ShowStateMessage(string.Empty);
+                InitializeMessage();
                 ShowConnectionMessage(targetController?.ConnectionType, targetController?.IsConnected ?? false, targetController?.IsDataAvailable ?? false);
                 ShowConnectionTypeMessage(targetController?.ConnectionType);
                 ShowBatteryLevelMessage(targetController?.ConnectionType, targetController?.BatteryLevel);
-                Update3d(null);
             }
 
             void SetColor()
@@ -194,6 +198,15 @@ namespace PSMoveManager.Demo
             cube.RotateY = -v.Z;
             cube.RotateZ = -v.Y;
             pictureBox1.Image = cube.DrawCube(new Point(pictureBox1.Width / 2, pictureBox1.Height / 2), Pens.Aquamarine);
+        }
+
+        private void InitializeMessage()
+        {
+            ShowStateMessage(string.Empty);
+            ShowConnectionMessage(null, false, false);
+            ShowConnectionTypeMessage(null);
+            ShowBatteryLevelMessage(null, null);
+            Update3d(null);
         }
 
         private void ShowMessage(string message)

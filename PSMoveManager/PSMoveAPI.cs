@@ -228,7 +228,6 @@ namespace PSMove
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 38)] byte[] dev_info;
     }
 
-    // 共用体のマーシャリングは、上手くいっていない可能性があります。要確認。
     [StructLayout(LayoutKind.Explicit)]
     public struct PSMove3AxisVector
     {
