@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>PlayStation.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="PlayStation.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PSMoveManager\PSMoveManager.csproj" />
